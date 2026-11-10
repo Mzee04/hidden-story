@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>{{OG_TITLE}}</title>
+  <meta name="description" content="{{OG_DESC}}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Hidden Story" />
+  <meta property="og:title" content="{{OG_TITLE}}" />
+  <meta property="og:description" content="{{OG_DESC}}" />
+  <meta property="og:url" content="{{OG_URL}}" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="{{OG_TITLE}}" />
+  <meta name="twitter:description" content="{{OG_DESC}}" />
+  <meta name="theme-color" content="#140d0b" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body class="room-page">
+  <a class="skip" href="#compose">Skip to the question box</a>
+  <div class="wrap">
+    <header class="topbar">
+      <a class="brand" href="/"><img class="flame" src="/favicon.svg" alt="" /> Hidden Story</a>
+      <nav><a href="/how">How Clocked <span class="long">runs this game</span></a></nav>
+    </header>
+
+    <div id="missing" hidden class="card" style="text-align:center;margin:60px auto;max-width:520px">
+      <h2>This parlor is dark.</h2>
+      <p class="sub">No room with that code. Check the link with your host, or start a new mystery.</p>
+      <a class="btn btn-brass" href="/">Back to the entrance</a>
+    </div>
+
+    <main id="room" hidden>
+      <div class="room-head" id="room-head">
+        <div class="room-head-text">
+          <div class="eyebrow">Case <span id="code" class="code-chip"></span> <span id="host-badge" class="host-badge" hidden>Your room</span></div>
+          <h1 id="title"></h1>
+        </div>
+        <div class="room-actions">
+          <button class="btn btn-small btn-brass" id="copy-link" type="button"><span class="long">Copy player link</span><span class="short">Share</span></button>
+          <button class="btn btn-small btn-danger" id="end-btn" type="button" hidden><span class="long">End &amp; reveal</span><span class="short">Reveal</span></button>
+        </div>
+      </div>
+
+      <div class="room-grid">
+        <aside class="room-side">
+          <div class="casefile parchment">
+            <span class="stamp-label">The premise</span>
+            <p id="premise"></p>
+          </div>
+          <div class="side-section share-section">
+            <h4>Invite detectives</h4>
+            <div class="linkbox"><output id="link" class="linkout" aria-label="Player link"></output><button class="btn btn-small btn-ghost" type="button" id="copy-link-2">Copy</button></div>
+            <div class="field-note">Anyone with the link can join. The secret never leaves the server.</div>
+          </div>
+          <div class="side-section">
+            <h4>The tally</h4>
+            <div class="tally">
+              <div><b id="t-yes">0</b><small>Yes</small></div>
+              <div><b id="t-no">0</b><small>No</small></div>
+              <div><b id="t-unknown">0</b><small>Not in story</small></div>
+              <div><b id="t-blocked">0</b><small>Tricks foiled</small></div>
+            </div>
+          </div>
+          <div class="side-section">
+            <h4>Detectives in the room</h4>
+            <div class="players" id="players"></div>
+          </div>
+        </aside>
+
+        <section class="table" aria-label="The table">
+          <div id="reveal-slot"></div>
+          <div class="log" id="log" aria-live="polite" aria-relevant="additions text"></div>
+          <div class="composer" id="composer">
+            <div class="tabs" role="tablist" aria-label="What do you want to do?">
+              <button class="tab active" type="button" role="tab" id="tab-ask" data-mode="ask" aria-selected="true" aria-controls="compose-form">Ask a yes/no question</button>
+              <button class="tab" type="button" role="tab" id="tab-guess" data-mode="guess" aria-selected="false" aria-controls="compose-form" tabindex="-1">Solve the mystery</button>
+            </div>
+            <form class="compose-row" id="compose-form" role="tabpanel" aria-labelledby="tab-ask" autocomplete="off">
+              <input type="text" id="compose" maxlength="240" placeholder="Was anyone hurt?" aria-label="Your question" enterkeyhint="send" />
+              <button class="btn btn-brass" type="submit" id="send">Ask</button>
+            </form>
+            <div class="chips" id="chips" aria-label="Suggested questions"></div>
+            <div class="compose-help" id="compose-help" aria-live="polite"></div>
+            <button class="btn btn-small btn-brass" type="button" id="join-cta" hidden>Take a seat to play</button>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="overlay" id="join" hidden>
+    <form class="modal parchment" id="join-form" autocomplete="off" role="dialog" aria-modal="true" aria-labelledby="join-title" aria-describedby="join-premise">
+      <div class="eyebrow" style="color:#8e1b1b">You have been invited to a mystery</div>
+      <h2 id="join-title"></h2>
+      <p class="premise" id="join-premise"></p>
+      <label for="name">Your detective name</label>
+      <input type="text" id="name" maxlength="24" required placeholder="Inspector Ash" />
+      <div class="cta-row" style="justify-content:flex-start;margin-top:18px">
+        <button class="btn btn-brass" type="submit">Take a seat</button>
+        <button class="btn btn-ghost btn-on-light" type="button" id="join-later">Just watch</button>
+      </div>
+    </form>
+  </div>
+
+  <footer class="site">
+    <a href="/">New mystery</a> &middot; <a href="/how">How Clocked runs this game</a> &middot; Refereed by Clocked Guard + Decide
+  </footer>
+  <script type="module" src="/room.js"></script>
+</body>
+</html>

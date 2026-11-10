@@ -1,0 +1,20 @@
+{
+  "name": "hidden-story",
+  "version": "1.0.0",
+  "description": "Hidden Story: a yes/no mystery party game refereed by Clocked Guard and Clocked Decide.",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "mock": "CLOCKED_MOCK=1 node server/index.js",
+    "smoke": "node scripts/smoke.js"
+  },
+  "dependencies": {
+    "clocked-sdk": "0.7.0"
+  }
+}

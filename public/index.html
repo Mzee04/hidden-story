@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Hidden Story: a yes/no mystery parlor game" />
+  <meta property="og:description" content="Paste a mystery, share a link, and let friends ask yes/no questions until someone cracks it. Refereed by Clocked." />
+  <meta name="theme-color" content="#140d0b" />
+  <title>Hidden Story: a yes/no mystery parlor game</title>
+  <meta name="description" content="Paste a mystery, share a link, and let your friends ask yes/no questions until someone cracks it. Refereed by Clocked." />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="wrap">
+    <header class="topbar">
+      <a class="brand" href="/"><img class="flame" src="/favicon.svg" alt="" /> Hidden Story</a>
+      <nav><a href="/how">How Clocked <span class="long">runs this game</span></a></nav>
+    </header>
+
+    <main id="main" tabindex="-1">
+    <section class="hero">
+      <svg class="candle" viewBox="0 0 54 90" aria-hidden="true">
+        <defs><radialGradient id="g" cx="50%" cy="70%" r="60%"><stop offset="0" stop-color="#fff7d6"/><stop offset=".5" stop-color="#ffc55c"/><stop offset="1" stop-color="#e2731f"/></radialGradient></defs>
+        <path class="fl" d="M27 4c7 10 11 15 11 22a11 11 0 0 1-22 0c0-7 4-12 11-22z" fill="url(#g)"/>
+        <rect x="24" y="36" width="6" height="6" fill="#2a1a10"/>
+        <rect x="14" y="40" width="26" height="46" rx="3" fill="#efe3c8"/><path d="M14 46c4 3 6-2 10 1s5 6 7 2 6-3 9-1v-6H14z" fill="#e2d1ac"/>
+      </svg>
+      <div class="eyebrow">A parlor game of yes, no &amp; not in the story</div>
+      <h1>Hidden <em>Story</em></h1>
+      <p class="lede">One person holds a secret. Everyone else asks yes/no questions. An incorruptible narrator answers from the hidden story only, and cannot be tricked into telling.</p>
+      <div class="cta-row">
+        <button class="btn btn-brass" id="play-sample">&#9670; Play the sample mystery</button>
+        <a class="btn btn-ghost" href="#write">Write your own</a>
+      </div>
+      <p class="hint">No accounts. Takes 30 seconds. Share the room link with friends anywhere.</p>
+    </section>
+
+    <section class="grid-2" id="write">
+      <div class="card">
+        <h2>Write a mystery</h2>
+        <p class="sub">Players see the title and premise. The hidden story and the secret stay on the server; they are never sent to anyone's browser until the case is solved.</p>
+        <form id="create-form" autocomplete="off">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" maxlength="80" placeholder="The Locked Greenhouse" />
+
+          <label for="premise">Public premise <span class="opt">(what players read)</span></label>
+          <textarea id="premise" name="premise" maxlength="600" required placeholder="A gardener is found asleep inside a greenhouse locked from the outside. Every plant has been watered. Who locked the door?"></textarea>
+
+          <label for="story">Hidden story <span class="lock">&#128274; never shown to players</span></label>
+          <textarea id="story" name="story" class="secret-field" maxlength="4000" required rows="6" placeholder="The full truth, with enough detail for the narrator to answer questions: who, what, where, why, and what did NOT happen."></textarea>
+          <div class="field-note">Tip: mention a few things that did not happen ("nobody was hurt", "it was not a crime"). The narrator answers only from this text.</div>
+
+          <label for="secret">Secret answer <span class="lock">&#128274; what a winning guess must say</span></label>
+          <textarea id="secret" name="secret" class="secret-field" maxlength="600" required rows="2" placeholder="One or two sentences: the key explanation players must guess."></textarea>
+
+          <div class="cta-row" style="justify-content:flex-start">
+            <button class="btn btn-brass" type="submit" id="create-btn">Open the parlor</button>
+          </div>
+        </form>
+        <p class="field-note" style="margin-top:12px">You will land in your new room with the player link ready to share.</p>
+      </div>
+
+      <div>
+        <div class="card">
+          <h2>How a round goes</h2>
+          <ol class="steps">
+            <li><b>The host</b> writes a mystery, or opens the sample, and shares the room link.</li>
+            <li><b>Detectives</b> pick a name and ask yes/no questions: <i>"Was anyone hurt?"</i></li>
+            <li><b>The narrator</b> stamps each one <b>Yes</b>, <b>No</b>, or <b>Not in the story</b>. Attempts to trick it get refused.</li>
+            <li><b>Solve it</b> by writing your explanation. The first correct guess wins and the whole story is revealed.</li>
+          </ol>
+        </div>
+        <div class="card" style="margin-top:22px">
+          <h2>Have a code?</h2>
+          <p class="sub">Join a friend's room.</p>
+          <form class="join-inline" id="join-form">
+            <input type="text" id="join-code" maxlength="10" placeholder="ROOM CODE" aria-label="Room code" />
+            <button class="btn btn-ghost" type="submit">Join</button>
+          </form>
+        </div>
+      </div>
+    </section>
+    </main>
+  </div>
+  <footer class="site">
+    <a href="/how">How Clocked runs this game</a> &middot; Built for the Clocked Build Challenge &middot; Refereed by Clocked Guard + Decide
+  </footer>
+  <script type="module" src="/home.js"></script>
+</body>
+</html>
